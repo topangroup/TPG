@@ -1,0 +1,47 @@
+rules_version = '2';
+
+// ============================================================
+// Aturan keamanan Firestore.
+// Copy-paste isi file ini ke: Firebase Console > Firestore
+// Database > Rules > lalu klik "Publish".
+//
+// Intinya: SEMUA baca & tulis WAJIB login (request.auth != null).
+// Orang yang tidak punya akun (dibuat admin di Authentication)
+// tidak akan bisa membaca ataupun mengubah data sama sekali,
+// walaupun mereka tahu alamat website / apiKey publiknya.
+// ============================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /employees/{docId} {
+      allow read, write: if request.auth != null;
+    }
+    match /cuti/{docId} {
+      allow read, write: if request.auth != null;
+    }
+    match /claims/{docId} {
+      allow read, write: if request.auth != null;
+    }
+    match /resign/{docId} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Koleksi pemetaan username -> email, dipakai untuk cari email
+    // saat login pakai username (baik mode password maupun link
+    // email), jadi HARUS bisa dibaca walau belum login (get satuan
+    // per-username). "list" (lihat semua username sekaligus)
+    // sengaja ditutup supaya orang tidak bisa mengintip daftar
+    // semua username yang terdaftar.
+    match /usernames/{username} {
+      allow get: if true;
+      allow list: if false;
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.uid;
+      allow update, delete: if false;
+    }
+
+    // Tolak semua koleksi lain yang tidak terdaftar di atas.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

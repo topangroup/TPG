@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Karyawan — Topan Group</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ===================== LOGIN SCREEN ===================== -->
+<div id="loginScreen">
+  <div class="login-box">
+    <h1>Topan Group</h1>
+
+    <div class="auth-tabs">
+      <button class="auth-tab-btn active" data-authtab="login">Masuk</button>
+      <button class="auth-tab-btn" data-authtab="register">Daftar</button>
+    </div>
+
+    <!-- ---- Panel Masuk ---- -->
+    <div id="authPanelLogin" class="auth-panel active">
+      <div class="login-mode-tabs">
+        <button class="mode-btn active" data-mode="password">Pakai Password</button>
+        <button class="mode-btn" data-mode="link">Pakai Link Email</button>
+      </div>
+
+      <form id="loginPasswordForm" class="login-mode-form active">
+        <label>Username</label>
+        <input type="text" id="loginUsername" required autocomplete="username">
+        <label>Password</label>
+        <input type="password" id="loginPassword" required autocomplete="current-password">
+        <button type="submit">Masuk</button>
+      </form>
+
+      <form id="loginLinkForm" class="login-mode-form">
+        <label>Username</label>
+        <input type="text" id="loginLinkUsername" required>
+        <button type="submit">Kirim Link ke Email</button>
+        <p class="hint">Link masuk akan dikirim ke Gmail yang didaftarkan untuk username ini. Buka Gmail, klik link-nya untuk langsung masuk tanpa password.</p>
+      </form>
+
+      <div class="login-note" id="linkSentNote"></div>
+      <div class="login-err" id="loginErr"></div>
+    </div>
+
+    <!-- ---- Panel Daftar ---- -->
+    <div id="authPanelRegister" class="auth-panel">
+      <p class="hint" style="margin-top:0;">Buat akun sendiri untuk mengakses data karyawan.</p>
+      <form id="registerForm">
+        <label>Username</label>
+        <input type="text" id="regUsername" required>
+        <label>Password</label>
+        <input type="password" id="regPassword" required minlength="6">
+        <label>Gmail</label>
+        <input type="email" id="regEmail" required placeholder="untuk verifikasi & link masuk">
+        <button type="submit">Daftar</button>
+      </form>
+      <div class="login-err" id="registerErr"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== APP ===================== -->
+<div id="app">
+  <header>
+    <div class="header-row">
+      <div class="brand">
+        <span class="mark">TOPANGROUP</span>
+        <span style="color:#7a839a;font-size:12px;">v2</span>
+      </div>
+      <div class="user-chip">
+        <span id="userChipEmail"></span>
+        <button id="logoutBtn">Keluar</button>
+      </div>
+    </div>
+    <h1>Data Karyawan Topan Group</h1>
+    <p>Data karyawan, cuti, claim tiket/cuti lokal, dan resign/pecat — Indo &amp; Khmer</p>
+
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="karyawan">Data Karyawan</button>
+      <button class="tab-btn" data-tab="cuti">Daftar Cuti</button>
+      <button class="tab-btn" data-tab="claim">Claim Tiket / Cuti Lokal</button>
+      <button class="tab-btn" data-tab="resign">Resign / Pecat</button>
+    </div>
+  </header>
+
+  <div id="panel-karyawan" class="tab-panel active">
+    <div class="stats" id="karyawanStats"></div>
+  </div>
+  <div id="panel-cuti" class="tab-panel"></div>
+  <div id="panel-claim" class="tab-panel"></div>
+  <div id="panel-resign" class="tab-panel"></div>
+
+  <footer>Data tersimpan &amp; sinkron otomatis lewat Firebase — bisa diakses banyak orang sekaligus secara real-time.</footer>
+</div>
+
+<!-- ===================== SCRIPTS ===================== -->
+<!-- Firebase SDK (compat, tanpa perlu build tool — cocok untuk GitHub Pages) -->
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
+
+<script src="js/firebase-config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/crud-table.js"></script>
+<script src="js/module-karyawan.js"></script>
+<script src="js/module-cuti.js"></script>
+<script src="js/module-claim.js"></script>
+<script src="js/module-resign.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
