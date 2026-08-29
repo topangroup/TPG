@@ -20,12 +20,13 @@
    ============================================================ */
 
 const firebaseConfig = {
-  apiKey: "GANTI_DENGAN_API_KEY",
-  authDomain: "GANTI.firebaseapp.com",
-  projectId: "GANTI_PROJECT_ID",
-  storageBucket: "GANTI.appspot.com",
-  messagingSenderId: "GANTI_SENDER_ID",
-  appId: "GANTI_APP_ID"
+  apiKey: "AIzaSyDhocmPu3sc-H7-0ymZ1b0pkI1ftuKrR8o",
+  authDomain: "topan-group.firebaseapp.com",
+  projectId: "topan-group",
+  storageBucket: "topan-group.firebasestorage.app",
+  messagingSenderId: "422072178316",
+  appId: "1:422072178316:web:3b3f10f014a66735e3cda9",
+  measurementId: "G-QREDDW781H"
 };
 
 firebase.initializeApp(firebaseConfig);
